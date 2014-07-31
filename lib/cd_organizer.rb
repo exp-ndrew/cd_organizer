@@ -25,6 +25,19 @@ class CD
     end
   end
 
+  def CD.add_artist(new_artist)
+    if CD.get_artists.has_key?(new_artist.artist)
+      CD.get_artists[new_artist.artist] << new_artist.cd
+    else
+      CD.get_artists.store(new_artist.artist, [new_artist.cd])
+    end
+  end
+
+  def CD.clear
+    @@all_cds.clear
+    @@all_artists.clear
+  end
+
 end
 
 

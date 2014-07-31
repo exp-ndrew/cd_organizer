@@ -2,6 +2,10 @@ require 'rspec'
 require 'cd_organizer'
 
 describe "CD" do
+  before do
+    CD.clear
+  end
+
   describe "initialize" do
     it "creates a cd object" do
       new_cd = CD.new("Abbey Road", "The Beatles")
@@ -15,7 +19,32 @@ describe "CD" do
       CD.add_cd(new_cd)
       expect(CD.get_cds).to include("Abbey Road" => ["The Beatles"])
     end
+
+    it "adds an artist to an existing album" do
+      new_cd = CD.new("Abbey Road", "The Beatles")
+      CD.add_cd(new_cd)
+      newer_cd = CD.new("Abbey Road", "Some dude")
+      CD.add_cd(newer_cd)
+      expect(CD.get_cds).to include("Abbey Road" => ["The Beatles", "Some dude"])
+    end
   end
+
+  describe ".add_artist" do
+    it "adds an artist to @all_artists hash" do
+      new_artist = CD.new("Hybrid Theory", "Linkin Park")
+      CD.add_artist(new_artist)
+      expect(CD.get_artists).to include("Linkin Park" => ["Hybrid Theory"])
+    end
+    it "adds an album to an existing artist" do
+      new_artist = CD.new("Hybrid Theory", "Linkin Park")
+      CD.add_artist(new_artist)
+      newer_artist = CD.new("Meteora", "Linkin Park")
+      CD.add_artist(newer_artist)
+      expect(CD.get_artists).to include("Linkin Park" => ["Hybrid Theory","Meteora"])
+    end
+  end
+
+
 end
 
 
