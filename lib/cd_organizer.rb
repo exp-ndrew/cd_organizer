@@ -36,8 +36,7 @@ class CD
   end
 
   def CD.search_cds(cd_name)
-    CD.get_cds.has_key?(cd_name) ? "#{CD.get_cds[cd_name]} by #{CD.get_cds[cd_name].key(cd_name)}" : "CD does not exist"
-
+    CD.get_cds.has_key?(cd_name) ? "#{CD.get_cds.key(cd_name)} by #{cd_name} " : "CD does not exist"
   end
   def CD.clear
     @@all_cds.clear
