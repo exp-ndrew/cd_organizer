@@ -7,6 +7,8 @@ class CD
   def initialize(album, artist)
     @cd = album
     @artist = artist
+    CD.add_cd(self)
+    CD.add_artist(self)
   end
 
   def CD.get_cds
@@ -33,6 +35,10 @@ class CD
     end
   end
 
+  def CD.search_cds(cd_name)
+    CD.get_cds.has_key?(cd_name) ? "#{CD.get_cds[cd_name]} by #{CD.get_cds[cd_name].key(cd_name)}" : "CD does not exist"
+
+  end
   def CD.clear
     @@all_cds.clear
     @@all_artists.clear
